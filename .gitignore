@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Packaging / build outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Node / frontend
+node_modules/
+
+# Environment files (keep the committed examples)
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+*.local
+*.tmp
+tmp/
+
+# Generated experiment artifacts (keep the directory placeholders)
+results/runs/*
+results/repeated/*
+results/diagnostics/*
+logs/runs/*
+!results/runs/.gitkeep
+!results/repeated/.gitkeep
+!results/diagnostics/.gitkeep
+!logs/runs/.gitkeep

@@ -1,0 +1,35 @@
+name: n2_handover
+description: N2 inter-gNB handover using OAI gNB Telnet command (OAI v2.4.0+)
+
+topology:
+  ue: oai-nr-ue
+  source_gnb: oai-gnb0        # for topology A; use oai-cu0 for topology B
+  target_gnb: oai-gnb1        # for topology A; use oai-cu1 for topology B
+  core:
+    - oai-amf
+    - oai-smf
+    - oai-upf
+
+handover:
+  method: gnb_telnet
+  source_gnb_ip: 192.168.70.160      # topology A oai-gnb0; change to 192.168.70.150 for topology B oai-cu0
+  source_gnb_port: 9090
+  target_pci: 1                      # PCI of the target gNB cell
+  ue_rrc_id: 1                       # RRC ID of the UE at the source gNB
+  command: "ci trigger_n2_ho 1,1"   # rendered as: echo ci trigger_n2_ho <target_pci>,<ue_rrc_id>
+
+upf:
+  mode: static
+  count: 1
+
+measurement:
+  ping:
+    target: 192.168.71.135
+    interface: oaitun_ue1
+    interval_seconds: 0.2
+    post_handover_seconds: 10
+  iperf:
+    enabled: false
+    target: 192.168.70.135
+    mode: udp
+    duration_seconds: 10

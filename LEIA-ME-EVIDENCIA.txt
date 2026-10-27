@@ -1,0 +1,7 @@
+Cópia do repositório oai-rfsim-handover-testbed (commit c1320b3) preparada como evidência para o relatório CERISE (out/2026).
+
+Removido desta cópia:
+- docs/OAIBOX_info/: manual e capturas de tela de terceiros (Allbesmart), com todos os direitos reservados.
+- results/runs/*/host_info.txt: dados de rede da máquina de testes.
+
+O restante é idêntico ao repositório.

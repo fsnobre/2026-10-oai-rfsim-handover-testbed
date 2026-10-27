@@ -1,0 +1,27 @@
+# N2 CU/DU USRP (distributed) — du0 host (site 0, cell 0). Drives one USRP X310.
+# Connects to cu0 (CU0_HOST_IP) over F1.
+#   docker compose -f compose-du0.yaml --env-file .env up -d
+services:
+    du0:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-du0
+        network_mode: host
+        cap_add:
+            - SYS_NICE
+        ulimits:
+            memlock: -1
+            rtprio: 99
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --MACRLCs.[0].local_n_address ${DU0_HOST_IP}
+                                    --MACRLCs.[0].remote_n_address ${CU0_HOST_IP}
+                                    --RUs.[0].sdr_addrs addr=${DU0_SDR_ADDR}
+                                    --continuous-tx
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        volumes:
+            - ./conf-du0.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5

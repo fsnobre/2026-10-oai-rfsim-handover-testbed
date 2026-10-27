@@ -1,0 +1,7 @@
+timestamp,event,details
+2026-04-29T16:02:00Z,smoke_start,run_id=20260429_130200_manual_f1_handover_smoke
+2026-04-29T16:02:01Z,before_handover,ready=true
+2026-04-29T16:02:01Z,handover_trigger_start,cu_telnet 192.168.70.150:9090
+2026-04-29T16:02:01Z,handover_trigger_end,command=ci trigger_f1_ho
+2026-04-29T16:02:01Z,after_handover,triggered=true
+2026-04-29T16:02:02Z,smoke_end,status=pass

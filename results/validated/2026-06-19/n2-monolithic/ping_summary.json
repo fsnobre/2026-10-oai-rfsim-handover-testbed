@@ -1,0 +1,14 @@
+{
+  "estimated_interruption_ms": 198.86,
+  "first_ping_after_handover_ms": 0.145,
+  "max_icmp_seq": 65,
+  "packet_loss_percent": 1.538,
+  "packets_received": 64,
+  "packets_transmitted": 65,
+  "parsed_reply_count": 64,
+  "ping_error": null,
+  "ping_metrics_valid": true,
+  "rtt_avg_ms": 8.11203125,
+  "rtt_max_ms": 12.7,
+  "rtt_min_ms": 2.43
+}

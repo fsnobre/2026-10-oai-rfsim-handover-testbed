@@ -1,0 +1,128 @@
+services:
+    nr-ue:
+        image: oaisoftwarealliance/oai-nr-ue:develop
+        container_name: oai-nr-ue
+        cap_drop:
+            - ALL
+        cap_add:
+            - NET_ADMIN  # for interface bringup
+            - NET_RAW    # for ping
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    -r 106 --numerology 1 -C 3619200000
+                                    --rfsim --rfsimulator.[0].serveraddr server
+                                    --telnetsrv --telnetsrv.shrmod ciUE --telnetsrv.listenaddr 192.168.70.181 --telnetsrv.listenport 8091
+            ASAN_OPTIONS: detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.181
+        devices:
+             - /dev/net/tun:/dev/net/tun
+        volumes:
+            - ../../../conf-nr-ue.conf:/opt/oai-nr-ue/etc/nr-ue.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-uesoftmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    cu0:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-cu0
+        cap_drop:
+            - ALL
+        depends_on:
+            - nr-ue
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --gNBs.[0].remote_s_address 0.0.0.0
+                                    --telnetsrv --telnetsrv.listenaddr 192.168.70.150 --telnetsrv.shrmod ci
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.150
+        volumes:
+            - ./conf-cu0.conf:/opt/oai-gnb/etc/gnb.conf
+            - ./neighbour-config.conf:/opt/oai-gnb/etc/neighbour-config.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    du0:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-du0
+        cap_drop:
+            - ALL
+        depends_on:
+            - cu0
+        environment:
+            USE_ADDITIONAL_OPTIONS: --rfsim
+                                    --log_config.global_log_options level,nocolor,time
+                                    --telnetsrv --telnetsrv.listenaddr 192.168.70.171 --telnetsrv.shrmod ci
+                                    --rfsimulator.[0].serveraddr 192.168.70.181
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.171
+        volumes:
+            - ./conf-du0.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    cu1:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-cu1
+        cap_drop:
+            - ALL
+        depends_on:
+            - du0
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --gNBs.[0].remote_s_address 0.0.0.0
+                                    --telnetsrv --telnetsrv.listenaddr 192.168.70.155 --telnetsrv.shrmod ci
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.155
+        volumes:
+            - ./conf-cu1.conf:/opt/oai-gnb/etc/gnb.conf
+            - ./neighbour-config.conf:/opt/oai-gnb/etc/neighbour-config.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    du1:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-du1
+        cap_drop:
+            - ALL
+        depends_on:
+            - cu1
+        environment:
+            USE_ADDITIONAL_OPTIONS: --rfsim
+                                    --log_config.global_log_options level,nocolor,time
+                                    --telnetsrv --telnetsrv.listenaddr 192.168.70.172 --telnetsrv.shrmod ci
+                                    --rfsimulator.[0].serveraddr 192.168.70.181
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.172
+        volumes:
+            - ./conf-du1.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+networks:
+    public_net:
+        external: true
+        name: oai-cn5g-public-net

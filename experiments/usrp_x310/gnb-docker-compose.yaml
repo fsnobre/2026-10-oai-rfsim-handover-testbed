@@ -1,0 +1,37 @@
+services:
+    gnb:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-gnb
+        # USRP X310 is reached over the host's 10GbE NIC, so the gNB shares the
+        # host network namespace. It still reaches the 5GC on the
+        # oai-cn5g-public-net bridge (192.168.70.0/26), which is host-routable.
+        network_mode: host
+        cap_add:
+            - SYS_NICE   # real-time scheduling for the radio threads
+        # Locked memory and RT priority headroom for UHD/L1 threads.
+        ulimits:
+            memlock: -1
+            rtprio: 99
+        environment:
+            # No --rfsim: this is a real radio. Gains and SRS can be tuned here
+            # without editing the conf (e.g. --RUs.[0].max_rxgain, --gNBs.[0].do_SRS 0).
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --continuous-tx
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        volumes:
+            - ./conf-gnb-usrp.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+# NOTE: USRP X310 10GbE throughput needs large socket buffers and a jumbo MTU.
+# These are non-namespaced / host-level settings and must be applied on the HOST
+# (not in this compose file). See docs/guide-usrp-x310-cots.md:
+#   sudo sysctl -w net.core.rmem_max=33554432
+#   sudo sysctl -w net.core.wmem_max=33554432
+#   sudo ip link set <10gbe-iface> mtu 9000
+#
+# There is no nr-ue service: the UE is an external COTS phone with a SIM
+# programmed from oai-cn5g/database/oai_db.sql (see the guide).

@@ -1,0 +1,10 @@
+{
+  "estimated_interruption_ms": null,
+  "first_ping_after_handover_ms": null,
+  "packet_loss_percent": null,
+  "packets_received": 0,
+  "packets_transmitted": 0,
+  "rtt_avg_ms": null,
+  "rtt_max_ms": null,
+  "rtt_min_ms": null
+}

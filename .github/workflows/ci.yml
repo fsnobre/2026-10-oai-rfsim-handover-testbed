@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend validation
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: dashboard/backend
+      DASHBOARD_REPO_ROOT: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dashboard/backend/requirements-dev.txt
+      - name: Compile backend
+        run: python -m compileall dashboard/backend
+      - name: Ruff
+        run: ruff check dashboard/backend tools
+      - name: Backend and parser tests
+        run: pytest dashboard/backend tools
+      - name: Subscriber seed
+        run: python3 scripts/validate_cn_subscriber.py
+      - name: Dashboard compose config
+        run: docker compose -f dashboard/docker-compose.dashboard.yml config >/dev/null
+
+  shell:
+    name: Shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax check
+        run: for s in scripts/*.sh; do bash -n "$s"; done
+      - name: ShellCheck (errors only)
+        run: shellcheck -S error scripts/*.sh
+
+  frontend:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        working-directory: dashboard/frontend
+        run: npm ci
+      - name: Lint
+        working-directory: dashboard/frontend
+        run: npm run lint
+      - name: Test
+        working-directory: dashboard/frontend
+        run: npm run test
+      - name: Build
+        working-directory: dashboard/frontend
+        run: npm run build

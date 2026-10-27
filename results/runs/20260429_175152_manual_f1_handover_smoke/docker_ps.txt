@@ -1,0 +1,15 @@
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED          STATUS                             PORTS                                    NAMES
+9c97657ba69a   oaisoftwarealliance/oai-gnb:v2.3.0       "/tini -v -- /opt/oa…"   21 seconds ago   Up 20 seconds (healthy)                                                     du1
+3a0ea745a49a   oaisoftwarealliance/oai-gnb:v2.3.0       "/tini -v -- /opt/oa…"   23 seconds ago   Up 22 seconds (healthy)                                                     du0
+1349067e2d4b   oaisoftwarealliance/oai-nr-ue:v2.3.0     "/tini -v -- /opt/oa…"   23 seconds ago   Up 22 seconds (healthy)                                                     nr-ue
+797114e8ee73   oaisoftwarealliance/oai-gnb:v2.3.0       "/tini -v -- /opt/oa…"   25 seconds ago   Up 25 seconds (healthy)                                                     cu
+7ec0d1942f3c   oaisoftwarealliance/oai-upf:develop      "/openair-upf/bin/oa…"   39 seconds ago   Up 37 seconds (healthy)            2152/udp, 8805/udp                       upf
+8c9c16a56097   oaisoftwarealliance/oai-smf:develop      "/openair-smf/bin/oa…"   39 seconds ago   Up 37 seconds (healthy)            80/tcp, 8080/tcp, 8805/udp               smf
+10d5a41739c1   oaisoftwarealliance/oai-amf:develop      "/openair-amf/bin/oa…"   39 seconds ago   Up 37 seconds (healthy)            80/tcp, 8080/tcp, 9090/tcp, 38412/sctp   amf
+d54459cd342b   oaisoftwarealliance/oai-ausf:develop     "/openair-ausf/bin/o…"   39 seconds ago   Up 38 seconds (healthy)            80/tcp, 8080/tcp                         ausf
+85fde83b3e73   oaisoftwarealliance/oai-udm:develop      "/openair-udm/bin/oa…"   39 seconds ago   Up 38 seconds (healthy)            80/tcp, 8080/tcp                         udm
+29a954699e5c   oaisoftwarealliance/oai-udr:develop      "/openair-udr/bin/oa…"   39 seconds ago   Up 38 seconds (healthy)            80/tcp, 8080/tcp                         udr
+5a3f9c5d6b5a   oaisoftwarealliance/trf-gen-cn5g:jammy   "/bin/bash -c ' ip r…"   39 seconds ago   Up 38 seconds (health: starting)                                            ext-dn
+18a3f2dfb9bb   oaisoftwarealliance/ims:latest           "asterisk -fp"           39 seconds ago   Up 38 seconds (healthy)                                                     ims
+1525d1736e8f   mysql:8.0                                "docker-entrypoint.s…"   39 seconds ago   Up 38 seconds (healthy)            3306/tcp, 33060/tcp                      mysql
+2269788ae10f   oaisoftwarealliance/oai-nrf:develop      "/openair-nrf/bin/oa…"   39 seconds ago   Up 38 seconds (healthy)            80/tcp, 8080/tcp, 9090/tcp               nrf

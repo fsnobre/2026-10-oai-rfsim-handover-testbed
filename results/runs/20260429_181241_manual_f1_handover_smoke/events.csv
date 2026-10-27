@@ -1,0 +1,4 @@
+timestamp,event,details
+2026-04-29T21:12:41Z,smoke_start,run_id=20260429_181241_manual_f1_handover_smoke
+2026-04-29T21:12:42Z,ping_precheck_start,target=192.168.71.135;source=nr-ue
+2026-04-29T21:12:53Z,ping_precheck_failed,target=192.168.71.135;see=ping_raw.log

@@ -1,0 +1,35 @@
+name: usrp_x310
+description: Single monolithic gNB on a USRP X310 (real RF) with a COTS phone as the UE
+
+radio:
+  mode: usrp
+  device: x310
+  sdr_addr: 192.168.40.2      # X310 management/data IP on the host 10GbE link
+  clock_src: internal         # internal | external (10MHz+PPS) | gpsdo
+  time_src: internal
+
+topology:
+  gnb: oai-gnb
+  core:
+    - oai-amf
+    - oai-smf
+    - oai-upf
+
+# The UE is an external commercial handset. Its SIM must be programmed with one
+# of the subscribers provisioned in oai-cn5g/database/oai_db.sql. See
+# docs/guide-usrp-x310-cots.md for SIM programming.
+ue:
+  type: cots
+  imsi: "001010000000001"
+  key: "fec86ba6eb707ed08905757b1bb44b8f"
+  opc: "C42449363BBAD02B66D16BC975D77CC1"
+  plmn:
+    mcc: "001"
+    mnc: "01"
+  dnn: oai
+  nssai_sst: 1
+
+# No automated ping/iperf here: data-plane measurement from a COTS handset is
+# manual for now (browse / speed test on the phone). See the guide.
+measurement:
+  mode: manual

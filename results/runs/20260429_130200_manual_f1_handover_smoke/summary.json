@@ -1,0 +1,9 @@
+{
+  "run_id": "20260429_130200_manual_f1_handover_smoke",
+  "start_time": "2026-04-29T16:02:00Z",
+  "end_time": "2026-04-29T16:02:02Z",
+  "status": "pass",
+  "containers_checked": ["amf", "smf", "upf", "cu", "du0", "du1", "nr-ue"],
+  "handover_triggered": true,
+  "notes": "Startup/readiness checks passed and CU Telnet F1 handover command was sent. Ping/iperf parsing is not implemented yet."
+}

@@ -1,0 +1,26 @@
+# F1 USRP (distributed) — CU host. Radio-less. Runs on the CU host.
+# Reaches the AMF (CORE_HOST_IP) over the LAN and listens for both DUs on F1.
+#   docker compose -f compose-cu.yaml --env-file .env up -d
+services:
+    cu:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-cu
+        network_mode: host
+        cap_add:
+            - SYS_NICE
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --gNBs.[0].local_s_address ${CU_HOST_IP}
+                                    --gNBs.[0].remote_s_address 0.0.0.0
+                                    --gNBs.[0].amf_ip_address.[0].ipv4 ${AMF_N2_IP}
+                                    --gNBs.[0].NETWORK_INTERFACES.GNB_IPV4_ADDRESS_FOR_NG_AMF ${CU_HOST_IP}
+                                    --gNBs.[0].NETWORK_INTERFACES.GNB_IPV4_ADDRESS_FOR_NGU ${CU_HOST_IP}
+                                    --telnetsrv --telnetsrv.listenaddr ${CU_HOST_IP} --telnetsrv.shrmod ci
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        volumes:
+            - ./conf-cu.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5

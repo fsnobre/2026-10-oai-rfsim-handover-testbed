@@ -1,0 +1,17 @@
+[tool.pytest.ini_options]
+# The backend and tools packages are not installed; put them on sys.path so
+# tests can import them directly (mirrors PYTHONPATH=dashboard/backend in docs).
+pythonpath = ["dashboard/backend", "tools"]
+testpaths = ["dashboard/backend/tests", "tools/tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["dashboard/frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# E501 (line length) is ignored: the existing backend uses an established wider
+# style (long argv/dict literals and messages). The high-value checks — pyflakes
+# (F), import order (I), and whitespace (W/E other than E501) — stay enabled.
+ignore = ["E501"]

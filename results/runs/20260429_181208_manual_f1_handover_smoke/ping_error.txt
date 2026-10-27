@@ -1,0 +1,1 @@
+ping precheck failed: docker exec nr-ue ping -c 2 192.168.71.135

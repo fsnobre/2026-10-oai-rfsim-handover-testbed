@@ -1,0 +1,31 @@
+services:
+  dashboard-backend:
+    build:
+      context: ./backend
+    container_name: oai-dashboard-backend
+    environment:
+      DASHBOARD_REPO_ROOT: /repo
+      # "auto" detects the running topology from the containers, so the dashboard follows
+      # a deploy/teardown without a restart. Set a topology name to pin it instead.
+      DASHBOARD_TOPOLOGY: ${DASHBOARD_TOPOLOGY:-auto}
+      DASHBOARD_ENABLE_ACTIONS: ${DASHBOARD_ENABLE_ACTIONS:-false}
+      DASHBOARD_ENABLE_TELNET_POLLING: ${DASHBOARD_ENABLE_TELNET_POLLING:-false}
+      DASHBOARD_TRIGGER_TIMEOUT_SECONDS: ${DASHBOARD_TRIGGER_TIMEOUT_SECONDS:-180}
+      DASHBOARD_SMOKE_TIMEOUT_SECONDS: ${DASHBOARD_SMOKE_TIMEOUT_SECONDS:-900}
+      DASHBOARD_REPEATED_SMOKE_TIMEOUT_SECONDS: ${DASHBOARD_REPEATED_SMOKE_TIMEOUT_SECONDS:-3600}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ..:/repo:ro
+      - ../results:/repo/results:rw
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    network_mode: host
+
+  dashboard-frontend:
+    build:
+      context: ./frontend
+    container_name: oai-dashboard-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - dashboard-backend

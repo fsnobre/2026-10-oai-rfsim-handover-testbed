@@ -1,0 +1,31 @@
+name: manual_f1_handover
+description: Manual F1 handover using OAI CU Telnet command
+topology:
+  ue: oai-nr-ue
+  cu: oai-cu
+  dus:
+    - oai-du0
+    - oai-du1
+  core:
+    - oai-amf
+    - oai-smf
+    - oai-upf
+handover:
+  method: cu_telnet
+  cu_ip: 192.168.70.150
+  cu_port: 9090
+  command: ci trigger_f1_ho
+upf:
+  mode: static
+  count: 1
+measurement:
+  ping:
+    target: 192.168.71.135
+    interface: oaitun_ue1
+    interval_seconds: 0.2
+    post_handover_seconds: 10
+  iperf:
+    enabled: false
+    target: 192.168.70.135
+    mode: udp
+    duration_seconds: 10

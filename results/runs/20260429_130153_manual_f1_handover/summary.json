@@ -1,0 +1,7 @@
+{
+  "run_id": "20260429_130153_manual_f1_handover",
+  "collected_at": "2026-04-29T16:01:54Z",
+  "status": "logs_collected",
+  "containers_checked": ["amf", "smf", "upf", "cu", "du0", "du1", "nr-ue"],
+  "notes": "Standalone log collection."
+}

@@ -1,0 +1,19 @@
+{
+  "run_id": "20260429_175152_manual_f1_handover_smoke",
+  "start_time": "2026-04-29T20:51:52Z",
+  "end_time": "2026-04-29T20:52:34Z",
+  "status": "pass",
+  "containers_checked": ["amf", "smf", "upf", "cu", "du0", "du1", "nr-ue"],
+  "handover_triggered": true,
+  "ping_target": "192.168.71.135",
+  "ping_parsed": true,
+  "packets_transmitted": 0,
+  "packets_received": 0,
+  "packet_loss_percent": null,
+  "rtt_min_ms": null,
+  "rtt_avg_ms": null,
+  "rtt_max_ms": null,
+  "estimated_interruption_ms": null,
+  "first_ping_after_handover_ms": null,
+  "notes": "Startup/readiness checks passed, ping capture ran across handover, and CU Telnet F1 handover command was sent. Iperf parsing is not implemented yet."
+}

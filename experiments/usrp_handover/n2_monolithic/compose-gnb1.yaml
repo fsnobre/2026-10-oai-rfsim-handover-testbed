@@ -1,0 +1,30 @@
+# N2 monolithic USRP (distributed) — gnb1 host. Drives one USRP X310 (cell 1).
+# This is the N2 handover TARGET gNB (PCI 1).
+#   docker compose -f compose-gnb1.yaml --env-file .env up -d
+services:
+    gnb1:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-gnb1
+        network_mode: host
+        cap_add:
+            - SYS_NICE
+        ulimits:
+            memlock: -1
+            rtprio: 99
+        environment:
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --gNBs.[0].amf_ip_address.[0].ipv4 ${AMF_N2_IP}
+                                    --gNBs.[0].NETWORK_INTERFACES.GNB_IPV4_ADDRESS_FOR_NG_AMF ${GNB1_HOST_IP}
+                                    --gNBs.[0].NETWORK_INTERFACES.GNB_IPV4_ADDRESS_FOR_NGU ${GNB1_HOST_IP}
+                                    --RUs.[0].sdr_addrs addr=${GNB1_SDR_ADDR}
+                                    --telnetsrv --telnetsrv.listenaddr ${GNB1_HOST_IP} --telnetsrv.shrmod ci
+                                    --continuous-tx
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        volumes:
+            - ./conf-gnb1.conf:/opt/oai-gnb/etc/gnb.conf
+            - ./neighbour-config.conf:/opt/oai-gnb/etc/neighbour-config.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5

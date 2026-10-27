@@ -1,0 +1,13 @@
+{
+  "bits_per_second": 1049484.89751699,
+  "duration_seconds": 10,
+  "jitter_ms": 7.724931392288956,
+  "local_host": "10.0.0.2",
+  "lost_packets": 0,
+  "lost_percent": 0,
+  "mbps": 1.0494848975169901,
+  "packets": 906,
+  "protocol": "UDP",
+  "raw_json_valid": true,
+  "server_host": "192.168.70.135"
+}

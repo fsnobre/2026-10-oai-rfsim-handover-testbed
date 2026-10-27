@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==9.1.1
+ruff==0.15.20
+# Required by fastapi.testclient.TestClient for the HTTP-level route tests.
+httpx==0.28.1

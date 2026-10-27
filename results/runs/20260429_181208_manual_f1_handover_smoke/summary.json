@@ -1,0 +1,23 @@
+{
+  "run_id": "20260429_181208_manual_f1_handover_smoke",
+  "start_time": "2026-04-29T21:12:08Z",
+  "end_time": "2026-04-29T21:12:20Z",
+  "status": "failed",
+  "containers_checked": ["amf", "smf", "upf", "cu", "du0", "du1", "nr-ue"],
+  "handover_triggered": false,
+  "ping_target": "192.168.71.135",
+  "ping_capture_started": false,
+  "ping_precheck_passed": false,
+  "ping_parsed": false,
+  "ping_metrics_valid": false,
+  "ping_error": "ping precheck failed: docker exec nr-ue ping -c 2 192.168.71.135",
+  "packets_transmitted": null,
+  "packets_received": null,
+  "packet_loss_percent": null,
+  "rtt_min_ms": null,
+  "rtt_avg_ms": null,
+  "rtt_max_ms": null,
+  "estimated_interruption_ms": null,
+  "first_ping_after_handover_ms": null,
+  "notes": "Ping precheck failed; handover was not triggered because ping metrics would be invalid."
+}

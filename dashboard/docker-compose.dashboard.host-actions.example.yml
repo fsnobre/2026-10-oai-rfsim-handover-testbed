@@ -1,0 +1,23 @@
+# Optional override for running dashboard actions from inside the backend container.
+#
+# Why this exists:
+# - The backend talks to the host Docker daemon through /var/run/docker.sock.
+# - Bind-mount paths inside docker compose files are evaluated by the host daemon.
+# - Therefore DASHBOARD_REPO_ROOT must be a path that exists on the host, not only
+#   an in-container alias such as /repo.
+#
+# Usage from the repository root:
+#   DASHBOARD_HOST_REPO_ROOT="$(pwd)" DASHBOARD_ENABLE_ACTIONS=true \
+#     docker compose -f dashboard/docker-compose.dashboard.yml \
+#       -f dashboard/docker-compose.dashboard.host-actions.example.yml up --build
+
+services:
+  dashboard-backend:
+    environment:
+      DASHBOARD_REPO_ROOT: ${DASHBOARD_HOST_REPO_ROOT:?Set DASHBOARD_HOST_REPO_ROOT to the absolute host repo path}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${DASHBOARD_HOST_REPO_ROOT:?Set DASHBOARD_HOST_REPO_ROOT to the absolute host repo path}:${DASHBOARD_HOST_REPO_ROOT:?Set DASHBOARD_HOST_REPO_ROOT to the absolute host repo path}:ro
+      - ${DASHBOARD_HOST_REPO_ROOT:?Set DASHBOARD_HOST_REPO_ROOT to the absolute host repo path}/results:${DASHBOARD_HOST_REPO_ROOT:?Set DASHBOARD_HOST_REPO_ROOT to the absolute host repo path}/results:rw
+    devices:
+      - /dev/net/tun:/dev/net/tun

@@ -1,0 +1,9 @@
+timestamp,event,details
+2026-04-29T20:58:47Z,smoke_start,run_id=20260429_175847_manual_f1_handover_smoke
+2026-04-29T20:58:48Z,ping_capture_start,target=192.168.71.135;interval=0.2;source=nr-ue
+2026-04-29T20:58:51Z,before_handover,ready=true
+2026-04-29T20:58:51Z,handover_trigger_start,cu_telnet 192.168.70.150:9090
+2026-04-29T20:58:51Z,handover_trigger_end,command=ci trigger_f1_ho
+2026-04-29T20:58:51Z,after_handover,triggered=true
+2026-04-29T20:59:02Z,ping_capture_stop,pid=76044
+2026-04-29T20:59:02Z,smoke_end,status=pass

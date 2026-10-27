@@ -1,0 +1,114 @@
+services:
+    cu:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-cu
+        cap_drop:
+            - ALL
+        environment: 
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    --gNBs.[0].remote_s_address 0.0.0.0
+                                    --telnetsrv --telnetsrv.shrmod ci
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.150
+        volumes:
+          - ./conf-cu.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    du0:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-du0
+        cap_drop:
+            - ALL
+        environment:
+            USE_ADDITIONAL_OPTIONS: --rfsim
+                                    --log_config.global_log_options level,nocolor,time
+                                    --rfsimulator.[0].serveraddr 192.168.70.181
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        depends_on:
+            - cu
+            - nr-ue
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.171
+        volumes:
+            - ./conf-du.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    du1:
+        image: oaisoftwarealliance/oai-gnb:develop
+        container_name: oai-du1
+        cap_drop:
+            - ALL
+        environment:
+            USE_ADDITIONAL_OPTIONS: --rfsim
+                                    --log_config.global_log_options level,nocolor,time
+                                    --rfsimulator.[0].serveraddr 192.168.70.181
+                                    --gNBs.[0].gNB_DU_ID 3585
+                                    --gNBs.[0].nr_cellid 11111111
+                                    --gNBs.[0].servingCellConfigCommon.[0].physCellId 1
+                                    --gNBs.[0].servingCellConfigCommon.[0].absoluteFrequencySSB 643296
+                                    --gNBs.[0].servingCellConfigCommon.[0].dl_absoluteFrequencyPointA 642024
+                                    --gNBs.[0].servingCellConfigCommon.[0].ssb_PositionsInBurst_Bitmap 3
+                                    --MACRLCs.[0].local_n_address 192.168.70.172
+            ASAN_OPTIONS: detect_leaks=0:detect_odr_violation=0
+        depends_on:
+            - cu
+            - nr-ue
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.172
+        volumes:
+            - ./conf-du.conf:/opt/oai-gnb/etc/gnb.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-softmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    nr-ue:
+        image: oaisoftwarealliance/oai-nr-ue:develop
+        container_name: oai-nr-ue
+        cap_drop:
+            - ALL
+        cap_add:
+            - NET_ADMIN  # for interface bringup
+            - NET_RAW    # for ping
+        environment:
+            # OAI develop does not honor RFsim server mode from conf-nr-ue.conf;
+            # keep this minimal command-line override.
+            USE_ADDITIONAL_OPTIONS: --log_config.global_log_options level,nocolor,time
+                                    -r 106 --numerology 1 -C 3619200000
+                                    --rfsim --rfsimulator.[0].serveraddr server
+            ASAN_OPTIONS: detect_odr_violation=0
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.181
+            traffic_net:
+                ipv4_address: 192.168.71.181
+        devices:
+             - /dev/net/tun:/dev/net/tun
+        volumes:
+            - ./conf-nr-ue.conf:/opt/oai-nr-ue/etc/nr-ue.conf
+        healthcheck:
+            test: /bin/bash -c "pgrep nr-uesoftmodem"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+networks:
+    public_net:
+        external: true
+        name: oai-cn5g-public-net
+    traffic_net:
+        external: true
+        name: oai-ext-dn-traffic-net

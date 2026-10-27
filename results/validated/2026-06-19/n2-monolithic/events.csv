@@ -1,0 +1,16 @@
+timestamp,event,details
+2026-06-19T18:23:43Z,smoke_start,run_id=20260619_152343_n2_monolithic_smoke topology=n2-monolithic
+2026-06-19T18:25:41Z,ue_data_ready_start,target=192.168.71.135;interface=oaitun_ue1;timeout=120
+2026-06-19T18:25:41Z,ue_data_ready_passed,target=192.168.71.135;interface=oaitun_ue1;attempt=1
+2026-06-19T18:25:41Z,ping_precheck_start,target=192.168.71.135;interface=oaitun_ue1;source=nr-ue
+2026-06-19T18:25:42Z,ping_precheck_passed,target=192.168.71.135;interface=oaitun_ue1
+2026-06-19T18:25:42Z,ping_capture_start,target=192.168.71.135;interface=oaitun_ue1;interval=0.2;source=nr-ue
+2026-06-19T18:25:43Z,iperf_server_start,target=192.168.70.135;mode=udp
+2026-06-19T18:25:44Z,iperf_client_start,target=192.168.70.135;mode=udp;duration=10;interface=oaitun_ue1
+2026-06-19T18:25:45Z,before_handover,ready=true
+2026-06-19T18:25:45Z,handover_trigger_start,source gNB_telnet 192.168.70.160:9090
+2026-06-19T18:25:45Z,handover_trigger_end,command=ci trigger_n2_ho 1,1
+2026-06-19T18:25:45Z,after_handover,triggered=true
+2026-06-19T18:25:54Z,iperf_client_end,status=pass
+2026-06-19T18:25:56Z,ping_capture_stop,pid=3332557
+2026-06-19T18:25:57Z,smoke_end,status=pass
