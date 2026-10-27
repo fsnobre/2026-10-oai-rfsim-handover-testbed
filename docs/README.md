@@ -51,6 +51,7 @@ These documents provide evidence or historical context. They are not sequential 
 - [Baseline results](report-baseline-results.md)
 - [F1 RFsim startup and readiness fix report](report-f1-rfsim-readiness-fix.md)
 - [Repository evaluation: practices, standards, and UX](report-repository-evaluation.md)
+- [SMF IPv4v6 DNN fix report](report-smf-ipv4v6-dnn-fix.md)
 - [Development history](record-development-history.md)
 - [Dashboard Phase 6 operator overview record](record-dashboard-phase6-overview.md)
 - [xApp integration handoff](handoff-xapp-integration.md)

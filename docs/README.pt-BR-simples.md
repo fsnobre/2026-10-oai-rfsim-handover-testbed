@@ -55,6 +55,7 @@ Estes documentos trazem evidências ou contexto histórico. Eles não são pré-
 - [Resultado de referência](report-baseline-results.pt-BR-simples.md)
 - [Relatório da correção da partida e da prontidão do F1 em rfsim](report-f1-rfsim-readiness-fix.pt-BR-simples.md)
 - [Avaliação do repositório: práticas, normas e experiência de uso](report-repository-evaluation.pt-BR-simples.md)
+- [Relatório da correção do SMF para sessões IPv4v6](report-smf-ipv4v6-dnn-fix.pt-BR-simples.md)
 - [Histórico do desenvolvimento](record-development-history.pt-BR-simples.md)
 - [Registro da fase 6 do painel web: visão geral para o operador](record-dashboard-phase6-overview.pt-BR-simples.md)
 - [Passagem de contexto: integração com xApps](handoff-xapp-integration.pt-BR-simples.md)

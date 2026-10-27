@@ -55,6 +55,7 @@ Estes documentos fornecem evidências ou contexto histórico. Eles não são pr�
 - [Resultados de referência](report-baseline-results.pt-BR.md)
 - [Relatório da correção de inicialização e prontidão da F1 em RFsim](report-f1-rfsim-readiness-fix.pt-BR.md)
 - [Avaliação do repositório: práticas, padrões e experiência de uso](report-repository-evaluation.pt-BR.md)
+- [Relatório da correção do SMF para DNN com IPv4v6](report-smf-ipv4v6-dnn-fix.pt-BR.md)
 - [Histórico de desenvolvimento](record-development-history.pt-BR.md)
 - [Registro da visão geral do operador da Fase 6 do painel](record-dashboard-phase6-overview.pt-BR.md)
 - [Handoff da integração com xApp](handoff-xapp-integration.pt-BR.md)
