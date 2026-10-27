@@ -1,8 +1,8 @@
 # CLAUDE.md — OAI RFsim Handover Testbed
 
 Research testbed automating OAI 5G SA handover experiments (RFsim F1 / N2, plus USRP X310
-real-radio configs) with a FastAPI + React monitoring dashboard. Docs live in `docs/`
-(index and reading paths: `docs/README.md`). `AGENTS.md` holds the original agent notes;
+real-radio configs) with a FastAPI + React monitoring dashboard. Docs live in `docs/en/` (originals) with
+translations in `docs/pt-BR/` and `docs/pt-BR-simples/` (index and reading paths: `docs/en/README.md`). `AGENTS.md` holds the original agent notes;
 the invariants below supersede and extend it.
 
 ## Hard invariants — do not violate
@@ -65,7 +65,8 @@ manual verification, not part of this suite.
 
 ## Docs conventions
 
-- Naming taxonomy (see `docs/README.md`): `foundation-fNN-*`, `guide-*`, `tutorial-*`,
-  `report-*`, `record-*`, `handoff-*`. Every new doc gets indexed in `docs/README.md`.
+- Naming taxonomy (see `docs/en/README.md`): `foundation-fNN-*`, `guide-*`, `tutorial-*`,
+  `report-*`, `record-*`, `handoff-*`. Every new doc gets indexed in `docs/en/README.md`
+  and translated into `docs/pt-BR/` and `docs/pt-BR-simples/`.
 - Foundation IDs are stable identifiers; never renumber.
 - New guides/tutorials declare required reading near the top.

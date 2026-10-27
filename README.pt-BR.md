@@ -20,8 +20,8 @@ Também há topologias com rádio real (USRP X310), usando um celular comercial 
 | Handover N2 com USRP | 2 gNBs **ou** 2 pares CU+DU (distribuído) | 2 × X310 | Celular COTS |
 
 As topologias de handover rodam **um rádio por host**. Veja o
-[guia USRP X310 + UE COTS](docs/guide-usrp-x310-cots.pt-BR.md) (célula única) e o
-[guia de handover com USRP (distribuído)](docs/guide-usrp-distributed-handover.pt-BR.md).
+[guia USRP X310 + UE COTS](docs/pt-BR/guide-usrp-x310-cots.pt-BR.md) (célula única) e o
+[guia de handover com USRP (distribuído)](docs/pt-BR/guide-usrp-distributed-handover.pt-BR.md).
 
 ---
 
@@ -42,7 +42,7 @@ Nomes dos contêineres: `oai-amf`, `oai-smf`, `oai-upf`, `oai-cu`, `oai-du0`, `o
 
 Teste rápido repetido 5 vezes contra o `oai-ext-dn` local (`192.168.71.135`) pela `oaitun_ue1`. As 5 execuções passaram, com 0,0% de perda de pacotes e interrupção média estimada do handover de **207,07 ms**.
 
-Veja [docs/report-baseline-results.pt-BR.md](docs/report-baseline-results.pt-BR.md) para os resultados completos e a interpretação.
+Veja [docs/pt-BR/report-baseline-results.pt-BR.md](docs/pt-BR/report-baseline-results.pt-BR.md) para os resultados completos e a interpretação.
 
 ### Uso
 
@@ -106,7 +106,7 @@ UE_DATA_READY_TIMEOUT=180 ./scripts/run_smoke_test.sh f1
 
 ## Experimento de handover N2
 
-**Guia completo: [docs/guide-n2-handover.pt-BR.md](docs/guide-n2-handover.pt-BR.md)**
+**Guia completo: [docs/pt-BR/guide-n2-handover.pt-BR.md](docs/pt-BR/guide-n2-handover.pt-BR.md)**
 
 O handover N2 (inter-gNB, mediado pelo AMF) está disponível na OAI v2.4.0 ou posterior. Há duas topologias:
 
@@ -142,7 +142,7 @@ Por padrão, as execuções N2 repetidas reinicializam a topologia antes de cada
 
 ## Experimento com USRP X310 (rádio real)
 
-**Guia completo: [docs/guide-usrp-x310-cots.pt-BR.md](docs/guide-usrp-x310-cots.pt-BR.md)**
+**Guia completo: [docs/pt-BR/guide-usrp-x310-cots.pt-BR.md](docs/pt-BR/guide-usrp-x310-cots.pt-BR.md)**
 
 Uma única gNB monolítica controla uma USRP X310 por 10GbE; um celular COTS com SIM programado se conecta pelo ar. Não há rfsim, nem modelo de canal, nem contêiner `oai-nr-ue`.
 
@@ -163,7 +163,7 @@ A X310 exige jumbo frames e buffers de socket grandes no host (`mtu 9000`, `net.
 
 ## Handover com USRP X310 (distribuído, rádio real)
 
-**Guia completo: [docs/guide-usrp-distributed-handover.pt-BR.md](docs/guide-usrp-distributed-handover.pt-BR.md)**
+**Guia completo: [docs/pt-BR/guide-usrp-distributed-handover.pt-BR.md](docs/pt-BR/guide-usrp-distributed-handover.pt-BR.md)**
 
 As três topologias de handover (F1, N2 monolítica, N2 CU/DU) em rádios X310 reais, **um rádio por host**. Cada DU/gNB roda em seu próprio host com rede do host; as CUs não têm rádio; as configurações ficam em `experiments/usrp_handover/`. Os endereços entre os nós são injetados por host a partir de um `.env`.
 
@@ -252,12 +252,12 @@ Grava o estado das redes Docker, rotas, sondas de ping, regras de firewall e um 
 
 Documentação:
 
-- [Mapa da documentação e trilhas de leitura obrigatória](docs/README.pt-BR.md)
-- [Tutorial de handover F1](docs/tutorial-f1-handover.pt-BR.md)
-- [Tutorial de handover N2 monolítico](docs/tutorial-n2-monolithic-handover.pt-BR.md)
-- [Tutorial de handover N2 CU/DU](docs/tutorial-n2-cu-du-handover.pt-BR.md)
-- [Guia USRP X310 + UE COTS](docs/guide-usrp-x310-cots.pt-BR.md)
-- [Guia de handover com USRP (distribuído)](docs/guide-usrp-distributed-handover.pt-BR.md)
+- [Mapa da documentação e trilhas de leitura obrigatória](docs/pt-BR/README.pt-BR.md)
+- [Tutorial de handover F1](docs/pt-BR/tutorial-f1-handover.pt-BR.md)
+- [Tutorial de handover N2 monolítico](docs/pt-BR/tutorial-n2-monolithic-handover.pt-BR.md)
+- [Tutorial de handover N2 CU/DU](docs/pt-BR/tutorial-n2-cu-du-handover.pt-BR.md)
+- [Guia USRP X310 + UE COTS](docs/pt-BR/guide-usrp-x310-cots.pt-BR.md)
+- [Guia de handover com USRP (distribuído)](docs/pt-BR/guide-usrp-distributed-handover.pt-BR.md)
 - [Conjunto validado de experimentos nas três topologias](results/validated/2026-06-19/README.pt-BR.md)
 
 ### Medição opcional com iperf3 avulso

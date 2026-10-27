@@ -18,8 +18,8 @@ Real-radio (USRP X310) topologies are also provided, with a COTS phone as the UE
 | USRP N2 handover | 2 gNBs **or** 2 CU+DU pairs (distributed) | 2 × X310 | COTS phone |
 
 The handover topologies run **one radio per host**. See the
-[USRP X310 + COTS UE guide](docs/guide-usrp-x310-cots.md) (single cell) and the
-[USRP handover (distributed) guide](docs/guide-usrp-distributed-handover.md).
+[USRP X310 + COTS UE guide](docs/en/guide-usrp-x310-cots.md) (single cell) and the
+[USRP handover (distributed) guide](docs/en/guide-usrp-distributed-handover.md).
 
 ---
 
@@ -40,7 +40,7 @@ Container names: `oai-amf`, `oai-smf`, `oai-upf`, `oai-cu`, `oai-du0`, `oai-du1`
 
 5-run repeated smoke test against local `oai-ext-dn` (`192.168.71.135`) via `oaitun_ue1`. All 5 runs passed with 0.0% packet loss and a mean estimated handover interruption of **207.07 ms**.
 
-See [docs/report-baseline-results.md](docs/report-baseline-results.md) for the full results and interpretation.
+See [docs/en/report-baseline-results.md](docs/en/report-baseline-results.md) for the full results and interpretation.
 
 ### Usage
 
@@ -104,7 +104,7 @@ UE_DATA_READY_TIMEOUT=180 ./scripts/run_smoke_test.sh f1
 
 ## N2 Handover Experiment
 
-**Full guide: [docs/guide-n2-handover.md](docs/guide-n2-handover.md)**
+**Full guide: [docs/en/guide-n2-handover.md](docs/en/guide-n2-handover.md)**
 
 N2 handover (inter-gNB, AMF-mediated) is available in OAI v2.4.0+. Two topologies are provided:
 
@@ -140,7 +140,7 @@ Repeated N2 runs reset the topology before each trial by default so every same-d
 
 ## USRP X310 Experiment (real radio)
 
-**Full guide: [docs/guide-usrp-x310-cots.md](docs/guide-usrp-x310-cots.md)**
+**Full guide: [docs/en/guide-usrp-x310-cots.md](docs/en/guide-usrp-x310-cots.md)**
 
 A single monolithic gNB drives a USRP X310 over 10GbE; a COTS phone with a programmed SIM attaches over the air. There is no rfsim, no channel model, and no `oai-nr-ue` container.
 
@@ -161,7 +161,7 @@ The X310 needs host-side jumbo frames and large socket buffers (`mtu 9000`, `net
 
 ## USRP X310 Handover (distributed, real radio)
 
-**Full guide: [docs/guide-usrp-distributed-handover.md](docs/guide-usrp-distributed-handover.md)**
+**Full guide: [docs/en/guide-usrp-distributed-handover.md](docs/en/guide-usrp-distributed-handover.md)**
 
 The three handover topologies (F1, N2 monolithic, N2 CU/DU) on real X310 radios, **one radio per host**. Each DU/gNB runs on its own host with host networking; CUs are radio-less; configs live under `experiments/usrp_handover/`. Inter-node addresses are injected per host from a `.env`.
 
@@ -250,12 +250,12 @@ Writes Docker network state, routes, ping probes, firewall rules, and a summary 
 
 Documentation:
 
-- [Documentation map and required reading paths](docs/README.md)
-- [F1 handover tutorial](docs/tutorial-f1-handover.md)
-- [N2 monolithic handover tutorial](docs/tutorial-n2-monolithic-handover.md)
-- [N2 CU/DU handover tutorial](docs/tutorial-n2-cu-du-handover.md)
-- [USRP X310 + COTS UE guide](docs/guide-usrp-x310-cots.md)
-- [USRP handover (distributed) guide](docs/guide-usrp-distributed-handover.md)
+- [Documentation map and required reading paths](docs/en/README.md)
+- [F1 handover tutorial](docs/en/tutorial-f1-handover.md)
+- [N2 monolithic handover tutorial](docs/en/tutorial-n2-monolithic-handover.md)
+- [N2 CU/DU handover tutorial](docs/en/tutorial-n2-cu-du-handover.md)
+- [USRP X310 + COTS UE guide](docs/en/guide-usrp-x310-cots.md)
+- [USRP handover (distributed) guide](docs/en/guide-usrp-distributed-handover.md)
 - [Validated three-topology experiment set](results/validated/2026-06-19/README.md)
 
 ### Optional standalone iperf3 measurement

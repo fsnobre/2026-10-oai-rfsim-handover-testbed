@@ -17,7 +17,7 @@ topology:
 
 # The UE is an external commercial handset. Its SIM must be programmed with one
 # of the subscribers provisioned in oai-cn5g/database/oai_db.sql. See
-# docs/guide-usrp-x310-cots.md for SIM programming.
+# docs/en/guide-usrp-x310-cots.md for SIM programming.
 ue:
   type: cots
   imsi: "001010000000001"

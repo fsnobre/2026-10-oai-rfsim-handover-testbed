@@ -19,7 +19,7 @@ O repositório também tem topologias com rádio real (USRP X310). Nelas, o UE �
 | Handover F1 com USRP | 1 CU e 2 DUs (distribuída) | 2 X310 | Celular comercial |
 | Handover N2 com USRP | 2 gNBs **ou** 2 pares CU+DU (distribuída) | 2 X310 | Celular comercial |
 
-Nas topologias de handover, cada computador tem **um rádio**. Veja o [guia do USRP X310 com UE comercial](docs/guide-usrp-x310-cots.pt-BR-simples.md) (uma célula) e o [guia de handover distribuído com USRP](docs/guide-usrp-distributed-handover.pt-BR-simples.md).
+Nas topologias de handover, cada computador tem **um rádio**. Veja o [guia do USRP X310 com UE comercial](docs/pt-BR-simples/guide-usrp-x310-cots.pt-BR-simples.md) (uma célula) e o [guia de handover distribuído com USRP](docs/pt-BR-simples/guide-usrp-distributed-handover.pt-BR-simples.md).
 
 Siglas usadas neste documento:
 
@@ -49,7 +49,7 @@ Nomes dos contêineres: `oai-amf`, `oai-smf`, `oai-upf`, `oai-cu`, `oai-du0`, `o
 
 O resultado de referência tem 5 execuções do teste rápido (*smoke test*). O UE envia ping para o `oai-ext-dn` local (`192.168.71.135`) pela interface `oaitun_ue1`. As 5 execuções passaram, com 0,0% de perda de pacotes. A média da interrupção estimada do handover foi de **207,07 ms**.
 
-O [relatório do resultado de referência](docs/report-baseline-results.pt-BR-simples.md) tem os resultados completos e a interpretação.
+O [relatório do resultado de referência](docs/pt-BR-simples/report-baseline-results.pt-BR-simples.md) tem os resultados completos e a interpretação.
 
 ### Uso
 
@@ -113,7 +113,7 @@ UE_DATA_READY_TIMEOUT=180 ./scripts/run_smoke_test.sh f1
 
 ## Experimento de handover N2
 
-**Guia completo: [docs/guide-n2-handover.pt-BR-simples.md](docs/guide-n2-handover.pt-BR-simples.md)**
+**Guia completo: [docs/pt-BR-simples/guide-n2-handover.pt-BR-simples.md](docs/pt-BR-simples/guide-n2-handover.pt-BR-simples.md)**
 
 O handover N2 acontece entre gNBs e é coordenado pelo AMF. Ele existe na OAI a partir da v2.4.0. O testbed tem duas topologias:
 
@@ -149,7 +149,7 @@ No N2, o testbed recria a topologia antes de cada execução. Assim, todo handov
 
 ## Experimento com USRP X310 (rádio real)
 
-**Guia completo: [docs/guide-usrp-x310-cots.pt-BR-simples.md](docs/guide-usrp-x310-cots.pt-BR-simples.md)**
+**Guia completo: [docs/pt-BR-simples/guide-usrp-x310-cots.pt-BR-simples.md](docs/pt-BR-simples/guide-usrp-x310-cots.pt-BR-simples.md)**
 
 Uma gNB monolítica controla um USRP X310 por Ethernet de 10 Gbit/s. Um celular comercial, com um chip SIM programado, se conecta pelo ar. Não há rfsim, modelo de canal nem contêiner `oai-nr-ue`.
 
@@ -170,7 +170,7 @@ O computador do X310 precisa de quadros jumbo e de buffers de socket grandes (`m
 
 ## Handover com USRP X310 (distribuído, rádio real)
 
-**Guia completo: [docs/guide-usrp-distributed-handover.pt-BR-simples.md](docs/guide-usrp-distributed-handover.pt-BR-simples.md)**
+**Guia completo: [docs/pt-BR-simples/guide-usrp-distributed-handover.pt-BR-simples.md](docs/pt-BR-simples/guide-usrp-distributed-handover.pt-BR-simples.md)**
 
 As três topologias de handover (F1, N2 monolítica e N2 CU/DU) também rodam com rádios X310 reais. Cada computador tem **um rádio**. Cada DU ou gNB roda em um computador próprio, com a rede do computador (*host networking*). As CUs não têm rádio. As configurações ficam em `experiments/usrp_handover/`. Cada computador recebe os endereços dos outros nós por um arquivo `.env`.
 
@@ -261,12 +261,12 @@ O script grava em `results/diagnostics/` o estado das redes Docker, as rotas, te
 
 Documentação:
 
-- [Mapa da documentação e ordem de leitura](docs/README.pt-BR-simples.md)
-- [Tutorial de handover F1](docs/tutorial-f1-handover.pt-BR-simples.md)
-- [Tutorial de handover N2 com gNBs monolíticas](docs/tutorial-n2-monolithic-handover.pt-BR-simples.md)
-- [Tutorial de handover N2 com pares CU/DU](docs/tutorial-n2-cu-du-handover.pt-BR-simples.md)
-- [Guia do USRP X310 com UE comercial](docs/guide-usrp-x310-cots.pt-BR-simples.md)
-- [Guia de handover distribuído com USRP](docs/guide-usrp-distributed-handover.pt-BR-simples.md)
+- [Mapa da documentação e ordem de leitura](docs/pt-BR-simples/README.pt-BR-simples.md)
+- [Tutorial de handover F1](docs/pt-BR-simples/tutorial-f1-handover.pt-BR-simples.md)
+- [Tutorial de handover N2 com gNBs monolíticas](docs/pt-BR-simples/tutorial-n2-monolithic-handover.pt-BR-simples.md)
+- [Tutorial de handover N2 com pares CU/DU](docs/pt-BR-simples/tutorial-n2-cu-du-handover.pt-BR-simples.md)
+- [Guia do USRP X310 com UE comercial](docs/pt-BR-simples/guide-usrp-x310-cots.pt-BR-simples.md)
+- [Guia de handover distribuído com USRP](docs/pt-BR-simples/guide-usrp-distributed-handover.pt-BR-simples.md)
 - [Conjunto validado de experimentos nas três topologias](results/validated/2026-06-19/README.pt-BR-simples.md)
 
 ### Medição avulsa com iperf3 (opcional)

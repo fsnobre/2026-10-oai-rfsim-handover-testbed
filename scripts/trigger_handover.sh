@@ -45,7 +45,7 @@ echo "[trigger_handover] topology=${TOPOLOGY} start=${start_ts}"
 # NOTE: tools/parse_ping.py keys the handover interruption estimate on the
 # "handover_trigger_start" event name across all topologies. Keep this name
 # stable; renaming it (e.g. to a topology-specific name) silently breaks the
-# interruption metric. See docs/guide-measurement-pipeline.md.
+# interruption metric. See docs/en/guide-measurement-pipeline.md.
 append_event "${run_dir}" "handover_trigger_start" "${LABEL}_telnet ${HOST}:${PORT}"
 
 response="$(echo "${CMD}" | nc -N "${HOST}" "${PORT}")"

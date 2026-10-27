@@ -28,7 +28,7 @@ services:
 
 # NOTE: USRP X310 10GbE throughput needs large socket buffers and a jumbo MTU.
 # These are non-namespaced / host-level settings and must be applied on the HOST
-# (not in this compose file). See docs/guide-usrp-x310-cots.md:
+# (not in this compose file). See docs/en/guide-usrp-x310-cots.md:
 #   sudo sysctl -w net.core.rmem_max=33554432
 #   sudo sysctl -w net.core.wmem_max=33554432
 #   sudo ip link set <10gbe-iface> mtu 9000
